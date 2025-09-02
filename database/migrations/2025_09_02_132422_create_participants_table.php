@@ -12,9 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('participants', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+    $table->id(); // ParticipantId
+    $table->string('full_name');
+    $table->string('email')->unique();
+    $table->string('affiliation')->nullable();
+    $table->string('specialization')->nullable();
+    $table->boolean('cross_skill_trained')->default(false);
+    $table->string('institution')->nullable();
+    $table->timestamps();
+});
+
     }
 
     /**
