@@ -11,10 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('facilities', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        Schema::create('participants', function (Blueprint $table) {
+    $table->id(); // ParticipantId
+    $table->string('full_name');
+    $table->string('email')->unique();
+    $table->string('affiliation')->nullable();
+    $table->string('specialization')->nullable();
+    $table->boolean('cross_skill_trained')->default(false);
+    $table->string('institution')->nullable();
+    $table->timestamps();
+});
+
     }
 
     /**
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('facilities');
+        Schema::dropIfExists('participants');
     }
 };
