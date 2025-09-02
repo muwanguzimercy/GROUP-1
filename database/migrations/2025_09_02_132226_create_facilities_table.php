@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('participants', function (Blueprint $table) {
-    $table->id(); // ParticipantId
-    $table->string('full_name');
-    $table->string('email')->unique();
-    $table->string('affiliation')->nullable();
-    $table->string('specialization')->nullable();
-    $table->boolean('cross_skill_trained')->default(false);
-    $table->string('institution')->nullable();
+      Schema::create('facilities', function (Blueprint $table) {
+    $table->id(); // FacilityId
+    $table->string('name');
+    $table->string('location');
+    $table->text('description')->nullable();
+    $table->string('partner_organization')->nullable();
+    $table->string('facility_type');
+    $table->string('capabilities')->nullable();
     $table->timestamps();
 });
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('participants');
+        Schema::dropIfExists('facilities');
     }
 };
