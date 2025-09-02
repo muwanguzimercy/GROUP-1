@@ -12,9 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('equipment', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+    $table->id(); // EquipmentId
+    $table->foreignId('facility_id')->constrained()->onDelete('cascade');
+    $table->string('name');
+    $table->string('capabilities')->nullable();
+    $table->text('description')->nullable();
+    $table->string('inventory_code')->nullable();
+    $table->string('usage_domain')->nullable();
+    $table->string('support_phase')->nullable();
+    $table->timestamps();
+
+    
+});
+
     }
 
     /**
