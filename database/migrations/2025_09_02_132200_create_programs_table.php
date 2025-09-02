@@ -6,20 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('programs', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // ProgramId
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->string('national_alignment')->nullable();
+            $table->string('focus_areas')->nullable();
+            $table->string('phases')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('programs');
