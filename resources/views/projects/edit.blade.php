@@ -20,3 +20,4 @@
     <button type="submit" class="mt-4">Update Project</button>
 </form>
 @endsection
+
