@@ -12,9 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('outcomes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+    $table->id(); // OutcomeId
+    $table->foreignId('project_id')->constrained()->onDelete('cascade');
+    $table->string('title');
+    $table->text('description')->nullable();
+    $table->string('artifact_link')->nullable();
+    $table->string('outcome_type')->nullable();
+    $table->string('quality_certification')->nullable();
+    $table->string('commercialization_status')->nullable();
+    $table->timestamps();
+});
+
     }
 
     /**
