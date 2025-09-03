@@ -3,63 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Models\Outcome;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class OutcomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Project $project)
     {
-        //
+        $outcomes = $project->outcomes;
+        return view('outcomes.index', compact('project','outcomes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(Project $project)
     {
-        //
+        return view('outcomes.create', compact('project'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(Request $request, Project $project)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+        ]);
+
+        $project->outcomes()->create($request->all());
+        return redirect()->route('projects.show', $project->id)->with('success','Outcome added successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Outcome $outcome)
+    public function edit(Project $project, Outcome $outcome)
     {
-        //
+        return view('outcomes.edit', compact('project','outcome'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Outcome $outcome)
+    public function update(Request $request, Project $project, Outcome $outcome)
     {
-        //
+        $outcome->update($request->all());
+        return redirect()->route('projects.show',$project->id)->with('success','Outcome updated successfully');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Outcome $outcome)
+    public function destroy(Project $project, Outcome $outcome)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Outcome $outcome)
-    {
-        //
+        $outcome->delete();
+        return back()->with('success','Outcome deleted successfully');
     }
 }
